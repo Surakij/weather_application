@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Surakij/weather_application/issues"
   },
-  "homepage": "https://github.com/Surakij/weather_application#readme"
+  "homepage": "https://github.com/Surakij/weather_application#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
