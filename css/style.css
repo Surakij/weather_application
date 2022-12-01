@@ -1,1 +1,8 @@
-body {background: #8168d4}
+body {
+    background: #8168d4;
+}
+
+#map {
+    width: 50%;
+    height: 300px;
+}
