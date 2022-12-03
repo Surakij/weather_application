@@ -1,39 +1,23 @@
 import "../css/style.css";
-import {markUp} from "./markup_page.js";
-import {getCity, getWeatherData} from "./api.js";
+import {getCity} from "./apiGeo.js"
+import {createCityWeatherSection} from "./appCityTempIconSection.js";
+import {getWeatherData} from "./apiWeather.js";
+import {getMap} from "./appMapDiv.js";
+import {createForm} from "./appInputListForm.js";
 
-
-let city = '';
-let temp = 0;
-let icon =''
-let latitude, longitude;
 
 const app = async () => {
 
-    await getCity().then(data => {
-        console.log(data);
-        city = data.city;
-        latitude = data.latitude;
-        longitude = data.longitude;
-    }).catch(error => {
-        alert(`Rejected: ${error}`);
-    });
+    const locationData = await getCity();
+    const weatherData = await getWeatherData(locationData.city);
+    const sectionWeather = createCityWeatherSection(locationData, weatherData);
+    const map = getMap(locationData);
+    const form = createForm();
 
-    await getWeatherData(city).then(data => {
-        temp = data.main.temp;
-        icon = data.weather[0].icon;
-    }).catch(error => {
-        alert(`Rejected: ${error}`);
-    });
+    document.body.append(sectionWeather, form, map)
 
 
-    markUp(city,temp, icon, latitude, longitude);
 }
 
 app();
-
-
-
-
-
 
