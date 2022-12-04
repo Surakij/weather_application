@@ -26,6 +26,15 @@ export function createForm() {
 
         const newWeather = await getWeatherData(input.value);
         resetWeatherContent(newWeather.name, newWeather);
+    }, () => {
+        if (searchList.querySelectorAll("li").length > 10){
+            searchList.firstElementChild.remove();
+        }
+        let text = input.value;
+        let searchListUnit = document.createElement('li');
+        searchListUnit.innerText = text;
+        searchList.append(searchListUnit);
+        input.value = '';
     });
 
     return searchContainer;
