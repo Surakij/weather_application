@@ -10,8 +10,8 @@ const app = async () => {
 
     const locationData = await getCity();
     const weatherData = await getWeatherData(locationData.city);
-    const sectionWeather = createCityWeatherSection(locationData, weatherData);
-    const map = getMap(locationData);
+    const sectionWeather = createCityWeatherSection(locationData.city, weatherData);
+    const map = getMap(locationData.city);
     const form = createForm();
 
     document.body.append(sectionWeather, form, map)

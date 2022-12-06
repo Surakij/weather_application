@@ -1,5 +1,5 @@
 
-export function createCityWeatherSection(location, weather) {
+export function createCityWeatherSection(city, weather) {
 
 
     const CitTempAndIconContainer = document.createElement('section');
@@ -8,11 +8,11 @@ export function createCityWeatherSection(location, weather) {
     const tempUnit = document.createElement('span');
 
 
-    CitTempAndIconContainer.classList.add('city_temp_icon_container');
+    CitTempAndIconContainer.id = 'weather_cont';
     tempUnit.classList.add('temp');
     iconWeather.classList.add('weather_icon');
 
-    cityName.textContent = location.city;
+    cityName.textContent = city;
     tempUnit.textContent = Math.floor(+weather.main.temp) - 273;
     iconWeather.src = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
 

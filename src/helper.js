@@ -1,13 +1,14 @@
 import {createCityWeatherSection} from "./appCityTempIconSection.js";
-import {createForm} from "./appInputListForm.js";
 import {getMap} from "./appMapDiv.js";
+import {createForm} from "./appInputListForm.js";
 
 export function resetWeatherContent(city, weather) {
-    console.log(city);
-    // localStorage.setItem('city', JSON.stringify(location));
-    document.body.innerHTML = '';
-    const sectionWeather = createCityWeatherSection(city, weather);
-    const form = createForm();
-    const map = getMap(city);
-    document.body.append(sectionWeather, form, map)
+    localStorage.setItem('city', JSON.stringify(city));
+
+     document.getElementById('map').remove();
+     document.getElementById('weather_cont').remove();
+
+
+    document.body.append(getMap(city));
+    document.body.prepend(createCityWeatherSection(city, weather));
 }
