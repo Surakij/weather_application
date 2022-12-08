@@ -4,8 +4,6 @@ import {getMap} from "./appMapDiv.js";
 
 export function resetWeatherContent(city, weather) {
 
-    localStorage.setItem(city, city);
-
     document.getElementById('map').remove();
     document.getElementById('weather_cont').remove();
 
@@ -13,3 +11,4 @@ export function resetWeatherContent(city, weather) {
     document.body.append(getMap(city));
     document.body.prepend(createCityWeatherSection(city, weather));
 }
+

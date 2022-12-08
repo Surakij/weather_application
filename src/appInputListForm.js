@@ -44,13 +44,20 @@ export function createForm() {
         searchList.append(searchListUnit);
         input.value = '';
 
+
+        localStorage.setItem('cityList', searchList.innerHTML);
+
+
         document.querySelectorAll('li').forEach((item) => {
             item.addEventListener('click', async () => {
                 const newWeather = await getWeatherData(item.innerText);
                 resetWeatherContent(newWeather.name, newWeather);
             })
         })
+
+
     }
+
 
     return searchContainer;
 }
