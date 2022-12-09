@@ -11,7 +11,7 @@ export function createForm() {
 
     searchContainer.id = 'search_container';
     input.classList.add('input');
-    searchList.classList.add('search_list');
+    searchList.id = 'search_list';
 
     input.type = 'text';
     input.placeholder = 'city name';
