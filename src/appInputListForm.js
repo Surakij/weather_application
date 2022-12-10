@@ -1,7 +1,7 @@
 import {getWeatherData} from "./apiWeather.js";
 import {resetWeatherContent} from "./helper";
 
-export function createForm() {
+export function createForm(list) {
 
     const searchContainer = document.createElement('form');
     const input = document.createElement('input');
@@ -18,8 +18,14 @@ export function createForm() {
     button.textContent = "Click me";
     button.type = 'submit';
 
-    searchContainer.append(input, button, searchList);
+    if (list) {
+        searchList.innerHTML = list;
+        cityReloadByClick();
 
+    }
+
+
+    searchContainer.append(input, button, searchList);
 
     button.addEventListener('click', reloadPage);
     button.addEventListener('click', addList);
@@ -27,37 +33,43 @@ export function createForm() {
 
     async function reloadPage(e) {
         e.preventDefault();
-        if (!input.value) {
+        if (!input.value || input.value.trim() === '' ||  !isNaN(Number(input.value))) {
+            alert('Please enter a city');
+            input.value = '';
             return;
+        } else {
+            const newWeather = await getWeatherData(input.value);
+            resetWeatherContent(newWeather.name, newWeather);
         }
-
-        const newWeather = await getWeatherData(input.value);
-        resetWeatherContent(newWeather.name, newWeather);
     }
+
 
     function addList() {
         if (searchList.querySelectorAll("li").length > 9) {
             searchList.firstElementChild.remove();
+        } else if (!input.value || input.value.trim() === ''|| !isNaN(Number(input.value))) {
+            return;
         }
         const searchListUnit = document.createElement('li');
         searchListUnit.innerText = input.value;
         searchList.append(searchListUnit);
         input.value = '';
 
-
         localStorage.setItem('cityList', searchList.innerHTML);
 
+        cityReloadByClick();
 
-        document.querySelectorAll('li').forEach((item) => {
+
+    }
+
+    function cityReloadByClick() {
+        searchList.querySelectorAll('li').forEach((item) => {
             item.addEventListener('click', async () => {
                 const newWeather = await getWeatherData(item.innerText);
                 resetWeatherContent(newWeather.name, newWeather);
             })
         })
-
-
     }
-
 
     return searchContainer;
 }
