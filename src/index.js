@@ -10,7 +10,8 @@ const app = async () => {
 
     let form;
     if (localStorage.cityList) {
-        document.getElementsByClassName('search_list').innerHTML = localStorage.getItem('cityList');
+        let list = localStorage.getItem('cityList');
+        form = createForm(list);
     } else {
         form = createForm();
     }
