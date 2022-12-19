@@ -24,11 +24,9 @@ export function createForm(list) {
 
     }
 
-
     searchContainer.append(input, button, searchList);
 
     button.addEventListener('click', reloadPage);
-    // button.addEventListener('click', addList);
 
     let error;
 

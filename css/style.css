@@ -8,14 +8,13 @@ body {
     padding: 0;
     background: #6195ed;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     align-self: center;
     padding-top: 50px;
+
 }
-
-
 #map {
-    height: 500px;
+    height: 300px;
     grid-column-start: 1;
     grid-column-end: 3;
 }
@@ -24,6 +23,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: center;
+
 }
 
 h1 {
