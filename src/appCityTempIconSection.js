@@ -17,7 +17,7 @@ export function createCityWeatherSection(city, weather) {
     iconWeather.src = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
 
 
-    CitTempAndIconContainer.append(cityName, tempUnit, iconWeather);
+    CitTempAndIconContainer.append(cityName, iconWeather, tempUnit);
 
 
 return CitTempAndIconContainer;

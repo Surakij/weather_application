@@ -4,6 +4,7 @@ import {createCityWeatherSection} from "./appCityTempIconSection.js";
 import {getWeatherData} from "./apiWeather.js";
 import {getMap} from "./appMapDiv.js";
 import {createForm} from "./appInputListForm.js";
+import {createScriptGoogleMap} from "./helper.js";
 
 
 const app = async () => {
@@ -23,6 +24,8 @@ const app = async () => {
 
 
     document.body.append(sectionWeather, form, map);
+    createScriptGoogleMap();
+
 
 }
 

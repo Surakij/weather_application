@@ -28,26 +28,39 @@ export function createForm(list) {
     searchContainer.append(input, button, searchList);
 
     button.addEventListener('click', reloadPage);
-    button.addEventListener('click', addList);
+    // button.addEventListener('click', addList);
 
+    let error;
 
     async function reloadPage(e) {
         e.preventDefault();
-        if (!input.value || input.value.trim() === '' ||  !isNaN(Number(input.value))) {
+        if (!input.value || input.value.trim() === '' || !isNaN(Number(input.value))) {
             alert('Please enter a city');
             input.value = '';
             return;
-        } else {
-            const newWeather = await getWeatherData(input.value);
-            resetWeatherContent(newWeather.name, newWeather);
         }
-    }
+        try {
+            const weatherData = await getWeatherData(input.value);
+            if (weatherData.message) {
+                alert(weatherData.message);
+                input.value = '';
+                error = weatherData.message;
 
+            } else {
+                resetWeatherContent(weatherData.name, weatherData);
+                console.log(error);
+                addList();
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
     function addList() {
         if (searchList.querySelectorAll("li").length > 9) {
             searchList.firstElementChild.remove();
-        } else if (!input.value || input.value.trim() === ''|| !isNaN(Number(input.value))) {
+        } else if (!input.value || input.value.trim() === '' || !isNaN(Number(input.value))) {
             return;
         }
         const searchListUnit = document.createElement('li');
@@ -65,8 +78,17 @@ export function createForm(list) {
     function cityReloadByClick() {
         searchList.querySelectorAll('li').forEach((item) => {
             item.addEventListener('click', async () => {
-                const newWeather = await getWeatherData(item.innerText);
-                resetWeatherContent(newWeather.name, newWeather);
+                try {
+                    const newWeather = await getWeatherData(item.innerText);
+                    if (newWeather.message) {
+                        alert(newWeather.message);
+                        return;
+                    }
+                    resetWeatherContent(newWeather.name, newWeather);
+                } catch (error) {
+                    console.log(error)
+                }
+
             })
         })
     }
