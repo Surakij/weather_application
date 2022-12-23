@@ -1,5 +1,5 @@
-import {createCityWeatherSection} from "./appCityTempIconSection.js";
-import {getMap} from "./appMapDiv.js";
+import {createCityWeatherSection} from "./addSection.js";
+import {getMap} from "./addMap.js";
 
 
 export function resetWeatherContent(city, weather) {
