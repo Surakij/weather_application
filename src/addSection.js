@@ -1,5 +1,4 @@
-
-export function createCityWeatherSection(city, weather) {
+export function createCityWeatherSection(city, temp, icon) {
 
 
     const CitTempAndIconContainer = document.createElement('section');
@@ -13,8 +12,8 @@ export function createCityWeatherSection(city, weather) {
     iconWeather.classList.add('weather_icon');
 
     cityName.textContent = city;
-    tempUnit.textContent = Math.floor(+weather.main.temp) - 273;
-    iconWeather.src = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
+    tempUnit.textContent = temp;
+    iconWeather.src = icon;
 
 
     CitTempAndIconContainer.append(cityName, iconWeather, tempUnit);

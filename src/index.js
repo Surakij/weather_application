@@ -7,20 +7,23 @@ import {createForm} from "./addForm.js";
 
 
 
-const app = async () => {
+const app = async list => {
 
     let form;
     if (localStorage.cityList) {
         let list = localStorage.getItem('cityList');
         form = createForm(list);
     } else {
-        form = createForm();
+        form = createForm(list);
     }
 
-    const locationData = await getCity();
-    const weatherData = await getWeatherData(locationData.city);
-    const sectionWeather = createCityWeatherSection(locationData.city, weatherData);
-    getMap(locationData.city);
+    const city = await getCity();
+    const weatherArr = await getWeatherData(city);
+    let temp = weatherArr[0];
+    let icon = weatherArr[1];
+
+    const sectionWeather = createCityWeatherSection(city,temp, icon);
+    getMap(city);
 
 
     document.body.prepend(sectionWeather, form);
