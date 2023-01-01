@@ -18,20 +18,20 @@ export function createForm(list) {
     input.classList.add('input');
     searchList.id = 'search_list';
 
+    searchContainer.action = '#';
+    searchContainer.onsubmit = button.addEventListener('click', reloadPage);
     input.type = 'text';
     input.placeholder = 'city name';
-    button.textContent = "Click me";
+    button.textContent = "search";
     button.type = 'submit';
+
 
     if (list) {
         searchList.innerHTML = list;
         cityReloadByClick();
-
     }
 
     searchContainer.append(input, button, searchList);
-
-    button.addEventListener('click', reloadPage);
 
     async function reloadPage(e) {
         e.preventDefault();
@@ -74,5 +74,6 @@ export function createForm(list) {
             })
         })
     }
+
     return searchContainer;
 }

@@ -3,8 +3,6 @@ import {getMap} from "./addMap.js";
 
 
 export function resetWeatherContent(city, temp, icon) {
-
-
     document.getElementById('map').remove();
     document.getElementById('weather_cont').remove();
 

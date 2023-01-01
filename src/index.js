@@ -5,15 +5,14 @@ import {getWeatherData} from "./apiWeather.js";
 import {getMap} from "./addMap.js";
 import {createForm} from "./addForm.js";
 
-
-
 const app = async list => {
 
     let form;
     if (localStorage.cityList) {
         let list = localStorage.getItem('cityList');
         form = createForm(list);
-    } else {
+    }
+    else {
         form = createForm(list);
     }
 
@@ -25,10 +24,7 @@ const app = async list => {
     const sectionWeather = createCityWeatherSection(city,temp, icon);
     getMap(city);
 
-
     document.body.prepend(sectionWeather, form);
-
-
 
 }
 

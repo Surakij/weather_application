@@ -4,6 +4,7 @@ export async function getWeatherData(city) {
         let data = await response.json();
         let temp = Math.floor(data.main.temp) - 273;
         let icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+
         return [temp, icon];
     } catch (error) {
         return null;
