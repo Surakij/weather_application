@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Weather application</title>
+    <script defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjr2xBpii4hZzyM7erXc_MPO9_mufqaE&callback=mapInit'></script>
+    <script>
+        window.mapInit = function(elementId = 'map', city) {
+            const geocoder = new google.maps.Geocoder();
+            const map = new google.maps.Map(document.getElementById(elementId), {
+                center: {lat: 0, lng: 0},
+                zoom: 10
+            });
+            geocoder.geocode({'address': city }, function (results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                    return;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
